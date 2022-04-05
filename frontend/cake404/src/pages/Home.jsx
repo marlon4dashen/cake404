@@ -6,6 +6,7 @@ import { ThemeProvider } from "@emotion/react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import NavBar from "../components/NavBar";
 
 
 class Home extends Component {
@@ -46,6 +47,7 @@ class Home extends Component {
         return (
             <ThemeProvider theme={this.state.themeOn ? this.theme1 : this.theme2}>
                 <CssBaseline />
+                <NavBar/>
                 <div className="home" >
                     <Box sx={{
                         display: "flex",
