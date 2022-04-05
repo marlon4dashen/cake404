@@ -1,41 +1,35 @@
 import './App.css';
 import React from "react";
-import ReactDOM from "react-dom";
 import {
   BrowserRouter as Router,
-  Switch,
-  Route
+  Routes,
+  Route,
 } from "react-router-dom";
+import Home from './pages/Home';
+import Shop from './pages/Shop'
+import About from './pages/About'
+import Product from './pages/Product'
+import Products from './pages/Products'
+import User from './pages/User'
+import Error from './pages/Error'
+import { Component } from 'react';
 
-function App() {
-  (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/shop">
-          <Shop />
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/products/:id">
-          <Product />
-        </Route>
-        <Route path="products">
-          <Products />
-        </Route>
-        <Route path="/:userid">
-          <User />
-        </Route>
-        <Route>
-          <Error />
-        </Route>
-      </Switch>
-    </BrowserRouter>
-
-  )
+class App extends Component {
+  render() {
+    return(
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/shop" element={<Shop />} />
+          <Route exact path="/about" element={<About />} />
+          <Route path="/products/:id" element={<Product />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/:userid" element={<User />} />
+          <Route path="/*" element={<Error />}></Route>
+        </Routes>
+      </Router>
+    )
+  }
 }
 
 export default App;
