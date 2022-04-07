@@ -18,7 +18,7 @@ class Home extends Component {
     theme1 = createTheme({
         palette: {
             background: {
-                default: "#ED6A5A"
+                default: "#9c6644"
             },
             text: {
                 primary: "#F0F8FF"
@@ -47,7 +47,6 @@ class Home extends Component {
         return (
             <ThemeProvider theme={this.state.themeOn ? this.theme1 : this.theme2}>
                 <CssBaseline />
-                <NavBar/>
                 <div className="home" >
                     <Box sx={{
                         display: "flex",
@@ -65,6 +64,7 @@ class Home extends Component {
                         </IconButton>
                     </Box>
                 </div>
+                <NavBar/>
             </ThemeProvider>
         )
     }

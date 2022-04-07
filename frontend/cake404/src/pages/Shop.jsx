@@ -5,7 +5,7 @@ class Shop extends Component {
     render() {
         return (
             <div>
-                <h1>Hello world!</h1>
+                <h1>Shop</h1>
             </div>
         )
     }
