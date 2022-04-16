@@ -155,13 +155,11 @@ class NavBar extends Component {
                                         fontSize: "20px",
                                         fontWeight: "bold",
                                     }}>
-                                    
                                         {page}
                                     </Button>
                                 ))}
-
                             </Box>
-                            <Box >
+                            {this.state.loggedin && <Box >
                                 <IconButton
                                   size="large"
                                   aria-label="account of current user"
@@ -194,7 +192,21 @@ class NavBar extends Component {
                                       color: "black"
                                   }} onClick={this.handleCloseUserMenu}>My account</MenuItem>
                                 </Menu>
-                            </Box>
+                            </Box>}
+                            {!this.state.loggedin && <Box sx={{
+                                paddingRight: "30px"
+                            }}>
+                                <Button 
+                                    variant="text"
+                                    onClick={this.login}
+                                    sx={{
+                                        color: "#7f5539",
+                                        fontSize: "20px",
+                                        fontWeight: "bold",
+                                    }}>
+                                        SignIn
+                                    </Button>
+                            </Box>}
                         </Box>
                         {this.state.OpenShopMenu && <Box 
                             sx = {{
@@ -239,9 +251,6 @@ class NavBar extends Component {
 
         )
     }
-
-
-
 }
 
 export default withNavigation(NavBar)
