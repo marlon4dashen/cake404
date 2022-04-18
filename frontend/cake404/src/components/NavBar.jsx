@@ -10,6 +10,7 @@ import diet from "../assets/logos/diet.jpeg";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from "react-router";
+import SignupDrawer from "./SignupDrawer";
 
 export function withNavigation(Children) {
     return (props) => {
@@ -25,7 +26,8 @@ class NavBar extends Component {
             loggedin:false,
             shop:false,
             OpenShopMenu: false,
-            anchorElUser: null
+            anchorElUser: null,
+            toggleSignup: false
         }
         this.shopmenu = {
             "Everyday": {
@@ -59,16 +61,17 @@ class NavBar extends Component {
     withoutColor = createTheme({
         palette: {
             primary: {
-                main: "rgb(0, 0, 0, 0)"
+                main: "rgb(255, 0, 0, 0)"
             },
             background: {
-                paper: "rgb(0, 0, 0, 0)"
+                paper: "rgb(255, 0, 0, 0)"
             }
         }
     })
 
     login = () => {
-        this.setState({loggedin: true})
+        this.setState({toggleSignup: true,
+        loggedin: true})
         //log in
     }
 
@@ -111,144 +114,148 @@ class NavBar extends Component {
 
     render() {
         return (
-            <ThemeProvider theme={this.state.color ? this.withColor : this.withoutColor}>
-                <CssBaseline/>
-            <div className="navbar" onMouseEnter={this.visibleBar} onMouseLeave={this.handleMouseOff}>
-                <AppBar position="fixed" color='primary' sx={{ 
-                    display: "block",
-                    boxShadow: "none"
-                    }}>
-                    {/* <Toolbar sx={{
-                    }}> */}
-                    <Box sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "center",
-                        alignItems: "center"
-                    }}>
+            <div>
+                <ThemeProvider theme={this.state.color ? this.withColor : this.withoutColor}>
+                    <CssBaseline/>
+                    <div className="navbar" onMouseEnter={this.visibleBar} onMouseLeave={this.handleMouseOff}>
+                        <AppBar position="fixed" color='primary' sx={{ 
+                            display: "block",
+                            boxShadow: "none"
+                            }}>
+                            {/* <Toolbar sx={{
+                            }}> */}
                             <Box sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "center",
+                                alignItems: "center"
                             }}>
-                                <img src={logo} alt="" height="180" width="180" />  
-                            </Box>
-                            <Box sx={{ 
-                                justifyContent: "space-between",
-                                flexGrow: "1"
-                             }}>
-                                <Button 
-                                className=""
-                                variant="text"
-                                sx={{
-                                    color: "#7f5539",
-                                    fontSize: "20px",
-                                    fontWeight: "bold",
-                                }}
-                                endIcon={<AddShoppingCartIcon />}
-                                onMouseEnter={this.handleOpenShopMenu}>
-                                    Shop
-                                </Button>
-                                {this.pages.map(page => (
-                                    <Button 
-                                    variant="text"
-                                    onClick={() => this.pagesOnClick(page)}
-                                    sx={{
-                                        color: "#7f5539",
-                                        fontSize: "20px",
-                                        fontWeight: "bold",
+                                    <Box sx={{
                                     }}>
-                                        {page}
-                                    </Button>
-                                ))}
-                            </Box>
-                            {this.state.loggedin && <Box >
-                                <IconButton
-                                  size="large"
-                                  aria-label="account of current user"
-                                  aria-controls="menu-appbar"
-                                  aria-haspopup="true"
-                                  onClick={this.handleOpenUserMenu}
-                                  color="inherit"
-                                >
-                                  <Avatar src={logo} sx={{ width: "70px", height: "70px"}}></Avatar>
-                                </IconButton>
-                                <Menu
-                                  id="menu-appbar"
-                                  anchorEl={this.state.anchorElUser}
-                                  anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                  }}
-                                  keepMounted
-                                  transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                  }}
-                                  open={Boolean(this.state.anchorElUser)}
-                                  onClose={this.handleCloseUserMenu}
-                                >
-                                  <MenuItem sx={{
-                                      color: "black"
-                                  }} onClick={this.handleCloseUserMenu}>Profile</MenuItem>
-                                  <MenuItem sx={{
-                                      color: "black"
-                                  }} onClick={this.handleCloseUserMenu}>My account</MenuItem>
-                                </Menu>
-                            </Box>}
-                            {!this.state.loggedin && <Box sx={{
-                                paddingRight: "30px"
-                            }}>
-                                <Button 
-                                    variant="text"
-                                    onClick={this.login}
-                                    sx={{
-                                        color: "#7f5539",
-                                        fontSize: "20px",
-                                        fontWeight: "bold",
+                                        <img src={logo} alt="" height="180" width="180" />  
+                                    </Box>
+                                    <Box sx={{ 
+                                        justifyContent: "space-between",
+                                        flexGrow: "1"
                                     }}>
-                                        SignIn
-                                    </Button>
-                            </Box>}
-                        </Box>
-                        {this.state.OpenShopMenu && <Box 
-                            sx = {{
-                                position: "absolute",
-                                width: "100%"
-                            }}
-                            >
-                                <Grid container >
-                                    {Object.keys(this.shopmenu).map(key => (
-                                        <Grid item xs={4} > 
-                                            <Card>
-                                                <CardActionArea style={{
-                                                    alignItems: 'center'}}>
-                                                    <div style={{ display:'flex', justifyContent:'center', marginTop: '10px' }}>
-                                                        <Avatar src={this.shopmenu[key].img} sx={{ width: 200, height: 200 }}/>
-                                                    </div>         
-                                                    <CardContent> 
-                                                      <Typography gutterBottom variant="h5" component="div" align="center"
-                                                      sx={{
-                                                          color:"text.secondary",
-                                                      }}>
-                                                        {key}
-                                                      </Typography>
-                                                      <Typography variant="body2" color="text.secondary" align="center"
-                                                      sx={{
-                                                          fontSize: "15px"
-                                                      }}>
-                                                        {this.shopmenu[key].description}
-                                                      </Typography>
-                                                    </CardContent>
-                                                </CardActionArea>
-                                            </Card>
+                                        <Button 
+                                        className=""
+                                        variant="text"
+                                        sx={{
+                                            color: "#7f5539",
+                                            fontSize: "20px",
+                                            fontWeight: "bold",
+                                            fontFamily: "Comic Sans MS"
+                                        }}
+                                        endIcon={<AddShoppingCartIcon />}
+                                        onMouseEnter={this.handleOpenShopMenu}>
+                                            Shop
+                                        </Button>
+                                        {this.pages.map(page => (
+                                            <Button 
+                                            variant="text"
+                                            onClick={() => this.pagesOnClick(page)}
+                                            sx={{
+                                                color: "#7f5539",
+                                                fontSize: "20px",
+                                                fontWeight: "bold",
+                                                fontFamily: "Comic Sans MS"
+                                            }}>
+                                                {page}
+                                            </Button>
+                                        ))}
+                                    </Box>
+                                    {this.state.loggedin && <Box >
+                                        <IconButton
+                                        size="large"
+                                        aria-label="account of current user"
+                                        aria-controls="menu-appbar"
+                                        aria-haspopup="true"
+                                        onClick={this.handleOpenUserMenu}
+                                        color="inherit"
+                                        >
+                                        <Avatar src={logo} sx={{ width: "70px", height: "70px"}}></Avatar>
+                                        </IconButton>
+                                        <Menu
+                                        id="menu-appbar"
+                                        anchorEl={this.state.anchorElUser}
+                                        anchorOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        keepMounted
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        open={Boolean(this.state.anchorElUser)}
+                                        onClose={this.handleCloseUserMenu}
+                                        >
+                                        <MenuItem sx={{
+                                            color: "black"
+                                        }} onClick={this.handleCloseUserMenu}>Profile</MenuItem>
+                                        <MenuItem sx={{
+                                            color: "black"
+                                        }} onClick={this.handleCloseUserMenu}>My account</MenuItem>
+                                        </Menu>
+                                    </Box>}
+                                    {!this.state.loggedin && <Box sx={{
+                                        paddingRight: "30px"
+                                    }}>
+                                        <Button 
+                                            variant="text"
+                                            onClick={this.login}
+                                            sx={{
+                                                color: "#7f5539",
+                                                fontSize: "20px",
+                                                fontWeight: "bold",
+                                                fontFamily: "Comic Sans MS"
+                                            }}>
+                                                SignIn
+                                            </Button>
+                                    </Box>}
+                                </Box>
+                                {this.state.OpenShopMenu && <Box 
+                                    sx = {{
+                                        position: "absolute",
+                                        width: "100%"
+                                    }}
+                                    >
+                                        <Grid container >
+                                            {Object.keys(this.shopmenu).map(key => (
+                                                <Grid item xs={4} > 
+                                                    <Card>
+                                                        <CardActionArea style={{
+                                                            alignItems: 'center'}}>
+                                                            <div style={{ display:'flex', justifyContent:'center', marginTop: '10px' }}>
+                                                                <Avatar src={this.shopmenu[key].img} sx={{ width: 200, height: 200 }}/>
+                                                            </div>         
+                                                            <CardContent> 
+                                                            <Typography gutterBottom variant="h5" component="div" align="center"
+                                                            sx={{
+                                                                color:"text.secondary",
+                                                            }}>
+                                                                {key}
+                                                            </Typography>
+                                                            <Typography variant="body2" color="text.secondary" align="center"
+                                                            sx={{
+                                                                fontSize: "15px"
+                                                            }}>
+                                                                {this.shopmenu[key].description}
+                                                            </Typography>
+                                                            </CardContent>
+                                                        </CardActionArea>
+                                                    </Card>
+                                                </Grid>
+                                            ))}
                                         </Grid>
-                                    ))}
-                                </Grid>
-                            </Box>}                  
-                        {/* <Logo  height="180" width="180"/> */}
-                    {/* </Toolbar> */}
-                </AppBar>
+                                    </Box>}                  
+                            {/* </Toolbar> */}
+                        </AppBar>
+                    </div>
+                </ThemeProvider>
+                <SignupDrawer toggle={this.state.toggleSignup}/>
             </div>
-            </ThemeProvider>
-
         )
     }
 }
