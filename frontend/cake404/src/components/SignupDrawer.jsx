@@ -1,4 +1,5 @@
-import { Box, Drawer, Input, Typography, TextField, Grid, Button, Link } from "@mui/material";
+import { Box, Drawer, Input, Typography, TextField, Grid, Button, Link, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import React from "react";
 import { Component } from "react";
 import { useNavigate } from "react-router";
@@ -31,6 +32,7 @@ class SignupDrawer extends Component {
         //connect backend
     }
 
+
     render() {
         return (
             <div className="signup-drawer">
@@ -40,15 +42,31 @@ class SignupDrawer extends Component {
                     <Box sx={{
                         width: "100vh"
                     }}>
-                        <Typography
-                        sx={{
-                            fontFamily: "Comic Sans MS",
-                            marginLeft: "3vh",
-                            paddingTop: "2vh"
-                        }}
-                        variant="h3" >
-                            Login
-                        </Typography>
+                        <Box sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            flexGrow: "1"
+                        }}>
+                            <Typography
+                            sx={{
+                                fontFamily: "Comic Sans MS",
+                                marginLeft: "3vh",
+                                paddingTop: "2vh"
+                            }}
+                            variant="h3" >
+                                Login
+                            </Typography>
+                            <IconButton 
+                                aria-label="close-signup" 
+                                onClick={() => this.props.onClose(false)}
+                                sx={{
+                                    marginRight: "3vh",
+                                    paddingTop: "2vh"
+                                }}>
+                                <CloseIcon fontSize="large" sx={{ color: "black" }}/>
+                            </IconButton>
+                        </Box>
                         <Box sx={{
                             display: "flex",
                             flexDirection: "column",
@@ -66,7 +84,7 @@ class SignupDrawer extends Component {
                             }}>
                                 <Grid item>
                                     <TextField
-                                            variant="outlined"
+                                            variant="standard"
                                             id="username"
                                             label="Username"
                                             name="username"
@@ -77,7 +95,7 @@ class SignupDrawer extends Component {
                                 </Grid>
                                 <Grid item>
                                     <TextField
-                                            variant="outlined"
+                                            variant="standard"
                                             id="password"
                                             label="Password"
                                             name="password"
@@ -96,13 +114,12 @@ class SignupDrawer extends Component {
                                     }}
                                     >Sign In</Button>
                                 </Grid>
+                                <Grid item>
+                                    <Link href="/SignUp" color="text.secondary">
+                                        Don't have an account?
+                                    </Link>
+                                </Grid>
                             </Grid>
-                            <Link href="/SignUp" 
-                            sx={{
-                                paddingTop: "5px"
-                            }}>
-                                Don't have an account?
-                            </Link>
                         </Box>
                     </Box>
                 </Drawer>

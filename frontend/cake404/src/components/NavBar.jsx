@@ -70,8 +70,7 @@ class NavBar extends Component {
     })
 
     login = () => {
-        this.setState({toggleSignup: true,
-        loggedin: true})
+        this.setState({toggleSignup: true})
         //log in
     }
 
@@ -110,6 +109,12 @@ class NavBar extends Component {
 
     visibleBar = () => {
         this.setState({color: true})
+    }
+
+    closeSignUpPage = (success) => {
+        this.setState({toggleSignup: false})
+        if (success)
+            this.setState({loggedin: true})
     }
 
     render() {
@@ -254,7 +259,7 @@ class NavBar extends Component {
                         </AppBar>
                     </div>
                 </ThemeProvider>
-                <SignupDrawer toggle={this.state.toggleSignup}/>
+                <SignupDrawer toggle={this.state.toggleSignup} onClose={this.closeSignUpPage}/>
             </div>
         )
     }
