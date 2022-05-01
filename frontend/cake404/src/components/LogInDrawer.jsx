@@ -1,8 +1,10 @@
-import { Box, Drawer, Input, Typography, TextField, Grid, Button, Link, IconButton } from "@mui/material";
+import { Box, Drawer, Input, Typography, TextField, Grid, Button, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import React from "react";
 import { Component } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import ErrorPopup from "./ErrorPopup";
 
 export function withNavigation(Children) {
     return (props) => {
@@ -11,31 +13,39 @@ export function withNavigation(Children) {
   }
 
 
-class SignupDrawer extends Component {
+class LogInDrawer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: "",
-            password: ""
+            email: "",
+            password: "",
+            error: null
         }
+
+        this.host = "http://localhost:8080"
     }
 
-    inputUsername = (e) => {
-        this.setState({username: e.target.value})
+    inputEmail = (e) => {
+        this.setState({email: e.target.value})
     }
 
     inputPassword = (e) => {
         this.setState({password: e.target.value})
     }
 
-    logIn = (e) => {
-        //connect backend
+    handleError = () => {
+        this.setState({error: null})
     }
 
+    logIn = () => {
+        this.props.logIn({email: this.state.email, password: this.state.password})
+        this.props.onClose()
+    }
 
     render() {
         return (
             <div className="signup-drawer">
+                <ErrorPopup error={this.state.error} onHandle={this.handleError}/>
                 <Drawer
                 anchor="right"
                 open={this.props.toggle}>
@@ -59,7 +69,7 @@ class SignupDrawer extends Component {
                             </Typography>
                             <IconButton 
                                 aria-label="close-signup" 
-                                onClick={() => this.props.onClose(false)}
+                                onClick={() => this.props.onClose()}
                                 sx={{
                                     marginRight: "3vh",
                                     paddingTop: "2vh"
@@ -85,12 +95,12 @@ class SignupDrawer extends Component {
                                 <Grid item>
                                     <TextField
                                             variant="standard"
-                                            id="username"
-                                            label="Username"
-                                            name="username"
+                                            id="email"
+                                            label="Email"
+                                            name="email"
                                             autoFocus
-                                            value={this.state.username}
-                                            onChange={this.inputUsername}
+                                            value={this.state.email}
+                                            onChange={this.inputEmail}
                                             />
                                 </Grid>
                                 <Grid item>
@@ -109,13 +119,14 @@ class SignupDrawer extends Component {
                                     variant="contained"
                                     size="medium"
                                     onClick={this.logIn}
-                                    sx={{
-                                        width:"100px",
+                                    style={{
+                                        backgroundColor:"#9c6644",
+                                        width: "100px"
                                     }}
                                     >Sign In</Button>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="/SignUp" color="text.secondary">
+                                    <Link to={{pathname: "/signup"}} >
                                         Don't have an account?
                                     </Link>
                                 </Grid>
@@ -129,4 +140,4 @@ class SignupDrawer extends Component {
     }
 }
 
-export default withNavigation(SignupDrawer)
+export default withNavigation(LogInDrawer)

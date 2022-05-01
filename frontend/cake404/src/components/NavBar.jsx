@@ -10,7 +10,7 @@ import diet from "../assets/logos/diet.jpeg";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from "react-router";
-import SignupDrawer from "./SignupDrawer";
+import LogInDrawer from "./LogInDrawer";
 
 export function withNavigation(Children) {
     return (props) => {
@@ -23,7 +23,6 @@ class NavBar extends Component {
         super(props)
         this.state = {
             color: false,
-            loggedin:false,
             shop:false,
             OpenShopMenu: false,
             anchorElUser: null,
@@ -71,12 +70,10 @@ class NavBar extends Component {
 
     login = () => {
         this.setState({toggleSignup: true})
-        //log in
     }
 
     logout = () => {
         this.setState({loggedin: false})
-        //log out
     }
 
     handleOpenShopMenu = (event) => {
@@ -111,10 +108,8 @@ class NavBar extends Component {
         this.setState({color: true})
     }
 
-    closeSignUpPage = (success) => {
+    closeSignUpPage = () => {
         this.setState({toggleSignup: false})
-        if (success)
-            this.setState({loggedin: true})
     }
 
     render() {
@@ -170,7 +165,7 @@ class NavBar extends Component {
                                             </Button>
                                         ))}
                                     </Box>
-                                    {this.state.loggedin && <Box >
+                                    {this.props.auth && <Box >
                                         <IconButton
                                         size="large"
                                         aria-label="account of current user"
@@ -204,7 +199,7 @@ class NavBar extends Component {
                                         }} onClick={this.handleCloseUserMenu}>My account</MenuItem>
                                         </Menu>
                                     </Box>}
-                                    {!this.state.loggedin && <Box sx={{
+                                    {!this.props.auth && <Box sx={{
                                         paddingRight: "30px"
                                     }}>
                                         <Button 
@@ -259,7 +254,7 @@ class NavBar extends Component {
                         </AppBar>
                     </div>
                 </ThemeProvider>
-                <SignupDrawer toggle={this.state.toggleSignup} onClose={this.closeSignUpPage}/>
+                <LogInDrawer logIn={this.props.logIn} toggle={this.state.toggleSignup} onClose={this.closeSignUpPage}/>
             </div>
         )
     }

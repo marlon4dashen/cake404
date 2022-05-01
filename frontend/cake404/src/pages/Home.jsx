@@ -68,7 +68,6 @@ class Home extends Component {
             //     <CssBaseline />
                 
                 <div class="home" >
-                    <NavBar/>
                     <Slide>
                      {this.imageList.map((slideImage, index)=> (
                         <div className="each-slide" key={index}>

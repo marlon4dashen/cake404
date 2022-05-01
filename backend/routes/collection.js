@@ -1,6 +1,6 @@
 const express = require('express')
 
-const collectionController = require('../controllers/feed')
+const collectionController = require('../controllers/collection')
 
 const router = express.Router()
 
