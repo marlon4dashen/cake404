@@ -148,6 +148,7 @@ class NavBar extends Component {
                                             fontFamily: "Comic Sans MS"
                                         }}
                                         endIcon={<AddShoppingCartIcon />}
+                                        onClick={() => this.pagesOnClick("Shop")}
                                         onMouseEnter={this.handleOpenShopMenu}>
                                             Shop
                                         </Button>

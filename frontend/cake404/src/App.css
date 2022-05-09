@@ -7,6 +7,10 @@
   margin: auto;
 }
 
+.shop {
+  margin-top: 20vh;
+}
+
 .each-slide > div {
   display: flex;
   align-items: center;
