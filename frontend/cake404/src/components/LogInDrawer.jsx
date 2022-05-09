@@ -126,7 +126,7 @@ class LogInDrawer extends Component {
                                     >Sign In</Button>
                                 </Grid>
                                 <Grid item>
-                                    <Link to={{pathname: "/signup"}} >
+                                    <Link to={{pathname: "/signup"}} onClick={this.props.onClose} >
                                         Don't have an account?
                                     </Link>
                                 </Grid>

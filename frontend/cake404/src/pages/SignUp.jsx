@@ -49,6 +49,10 @@ class SignUp extends Component{
         })
     }
 
+    toShop = () => {
+        this.props.navigate('../shop')
+    }
+
 
 
     render() {
@@ -115,27 +119,31 @@ class SignUp extends Component{
                         onChange={this.setPassword}
                         />
                     </Grid>
-                    <Box sx = {{
-                        display: "flex",
-                        flexDirection:"row",
-                        marginTop: "2vh",
-                        width:"40%",
-                        justifyContent: "space-between"
-                    }}>
-                        <Button variant="contained" 
-                        style={{
-                            backgroundColor:"#9c6644"
+                    <Grid item>
+                        <Box sx = {{
+                            display: "flex",
+                            flexDirection:"row",
+                            marginTop: "2vh",
+                            width: "40vh",
+                            justifyContent: "space-between"
                         }}>
-                        Go Back to Shop
-                        </Button>
-                        <Button type="submit" variant="contained"
-                        style={{
-                            backgroundColor:"#9c6644"
-                        }}
-                        onClick={this.handleSubmit}>
-                        Signup
-                        </Button>
-                    </Box>
+                            <Button variant="contained" 
+                            style={{
+                                backgroundColor:"#9c6644"
+                            }}
+                            onClick={this.toShop}>
+                            Go Back to Shop
+                            </Button>
+                            <Button type="submit" variant="contained"
+                            style={{
+                                backgroundColor:"#9c6644"
+                            }}
+                            onClick={this.handleSubmit}>
+                            Signup
+                            </Button>
+                        </Box>
+                    </Grid>
+
                 </Grid>
 
             </Box>
