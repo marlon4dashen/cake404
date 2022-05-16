@@ -15,6 +15,7 @@ function ProductCard(props) {
     //     price: 
     // }
 
+
     const navigate = useNavigate()
 
     const handleNavigation = () => {

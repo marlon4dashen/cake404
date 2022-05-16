@@ -1,0 +1,49 @@
+[
+    {
+        "name": "Black Forest",
+        "price": 19.99,
+        "label": "everyday",
+        "description": "Black Forest gateau consists of several layers of chocolate sponge cake sandwiched with whipped cream and cherries. It is decorated with additional whipped cream, maraschino cherries, and chocolate shavings.",
+        "image": "/data/images/everyday/black_forest.jpeg"
+    },
+
+    {
+        "name": "Basque Cheese Cake",
+        "price": 50.00,
+        "label": "everyday",
+        "description": "The Basque cheesecake is and must be charred, with rough and irregular edges and a soft and melting heart. The secret is in fact all there, in that scorched surface that adds that unique and unmistakable aroma to its complexity, which recalls notes of salted caramel or browned butter.",
+        "image": "/data/images/everyday/basque_cheese.jpeg"
+    },
+
+    {
+        "name": "Chantilly",
+        "price": 60.00,
+        "label": "formal",
+        "description": "Less ingredients, less sugar, everything here is about the pure, irresistible flavor of sea salt cream with cheese.",
+        "image": "/data/images/formal/chantilly.jpeg"
+    },
+
+    {
+        "name": "Croquembouche",
+        "price": 115.00,
+        "label": "formal",
+        "description": "The most well-knows French dessert now consisting of lychee cream filled choux pastry puffs piled into a cone and bound with pink shell. This elegant dessert and wow your guests with this show-stopping dessert at your next special occasion.",
+        "image": "/data/images/formal/croquembouche.jpeg"
+    },
+
+    {
+        "name": "Sesame",
+        "price": 55.00,
+        "label": "diet",
+        "description": "ZERO sugar FEWER calories SAME amazing taste! Wrapped in the unique black sesame cream and topped with mellow cheese foam, this cake would be your first autumn delight. The soft black sesame chiffon is freshly baked every day with monk fruit sweetener. Enjoy a healthy dessert NOW!",
+        "image": "/data/images/diet/sesame.jpeg"
+    },
+
+    {
+        "name": "Wimbledon",
+        "price": 40.00,
+        "label": "diet",
+        "description": "It is every girl's princess dream to indulge into this sweet fluffy cake and of course fresh strawberries.",
+        "image": "/data/images/diet/Wimbledon.jpeg"
+    }
+]

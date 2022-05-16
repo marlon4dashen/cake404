@@ -111,7 +111,7 @@ class App extends Component {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
+            <Route path="/shop/:select" element={<Shop />} />
             <Route path="/signup" element={<SignUp signUp={this.handleSignUp} />} />
             <Route path="/about" element={<About  />} />
             <Route path="/products/:id" element={<Product />} />

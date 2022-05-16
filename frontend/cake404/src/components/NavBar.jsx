@@ -148,7 +148,7 @@ class NavBar extends Component {
                                             fontFamily: "Comic Sans MS"
                                         }}
                                         endIcon={<AddShoppingCartIcon />}
-                                        onClick={() => this.pagesOnClick("Shop")}
+                                        onClick={() => this.pagesOnClick("Shop/all")}
                                         onMouseEnter={this.handleOpenShopMenu}>
                                             Shop
                                         </Button>
@@ -227,7 +227,8 @@ class NavBar extends Component {
                                                 <Grid item xs={4} > 
                                                     <Card>
                                                         <CardActionArea style={{
-                                                            alignItems: 'center'}}>
+                                                            alignItems: 'center'}}
+                                                            onClick={() => this.pagesOnClick('Shop/' + key)}>
                                                             <div style={{ display:'flex', justifyContent:'center', marginTop: '10px' }}>
                                                                 <Avatar src={this.shopmenu[key].img} sx={{ width: 200, height: 200 }}/>
                                                             </div>         

@@ -4,6 +4,7 @@ const collectionController = require('../controllers/collection')
 
 const router = express.Router()
 
-router.get('/all', collectionController.getCollections)
+router.get('/:select', collectionController.getCollections)
+
 
 module.exports = router;
