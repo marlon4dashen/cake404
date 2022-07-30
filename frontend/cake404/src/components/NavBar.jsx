@@ -78,7 +78,6 @@ class NavBar extends Component {
 
     handleOpenShopMenu = (event) => {
         this.setState({OpenShopMenu: true})
-        console.log(this.shopmenu.Formal)
     }
 
     handleOpenUserMenu = (event) => {
@@ -166,6 +165,7 @@ class NavBar extends Component {
                                             </Button>
                                         ))}
                                     </Box>
+                                    {/* account part */}
                                     {this.props.auth && <Box >
                                         <IconButton
                                         size="large"
@@ -216,6 +216,7 @@ class NavBar extends Component {
                                             </Button>
                                     </Box>}
                                 </Box>
+                                {/* shop menu */}
                                 {this.state.OpenShopMenu && <Box 
                                     sx = {{
                                         position: "absolute",

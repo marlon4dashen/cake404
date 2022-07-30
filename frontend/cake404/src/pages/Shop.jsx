@@ -38,9 +38,20 @@ class Shop extends Component {
     }
 
     componentDidMount() {
-
         const select = this.props.match.params.select
+        this.fetchShopItems(select)
+    }
 
+    componentDidUpdate(prevProps){
+        const select = this.props.match.params.select
+        if (select !== prevProps.match.params.select){
+            this.fetchShopItems(select) 
+        }
+ 
+    }
+
+
+    fetchShopItems = (select) => {
         fetch("http://localhost:8080/collection/" + select)
           .then(res => {
             res.json().then(resData => {
@@ -48,11 +59,9 @@ class Shop extends Component {
                 this.setState({
                     products: resData
                 })
-                console.log(this.state)
             })
           })
     }
-
 
     shopTheme = createTheme({
         typography: {
