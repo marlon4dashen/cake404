@@ -15,11 +15,13 @@ function ProductCard(props) {
     //     price: 
     // }
 
+    console.log(props)
 
     const navigate = useNavigate()
 
-    const handleNavigation = () => {
-        navigate('../products/' + productInfo.id)
+    const handleNavigation = (id) => {
+        console.log(id)
+        navigate('../products/' + id)
     }
 
     return (
@@ -27,12 +29,13 @@ function ProductCard(props) {
             <Card>
                 <CardActionArea style={{
                     alignItems: 'center'}}
-                onClick={handleNavigation}>
+                    onClick={() => handleNavigation(productInfo._id)}
+                >
                     <CardMedia
                         component="img"
-                        height="140"
-                        width="140"
-                        image={productInfo.image}
+                        height="400"
+                        width="250"
+                        image={"http://localhost:8080" + productInfo.image}
                         alt={productInfo.name}
                     />
                     <CardContent> 

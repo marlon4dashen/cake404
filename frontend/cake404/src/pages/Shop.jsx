@@ -1,7 +1,8 @@
-import { Typography, Box, ThemeProvider, CssBaseline, Grid, Select, MenuItem, TextField } from "@mui/material";
+import { Typography, Box, ThemeProvider, CssBaseline, Grid, Select, MenuItem, TextField, Card } from "@mui/material";
 import React from "react";
 import {
-    useParams
+    useParams,
+    useNavigate
   } from "react-router-dom";
 import { createTheme, IconButton, iconButtonClasses } from "@mui/material";
 import { Component } from "react";
@@ -11,9 +12,9 @@ import ProductCard from "../components/ProductCard"
 export function withRouter(Children) {
     return (props) => {
       const match = { params: useParams() };
-      return <Children {...props} match={match} />
+      return <Children {...props} match={match} navigate={useNavigate()} />
     }
-  }
+}
 
 
 
@@ -24,7 +25,8 @@ class Shop extends Component {
         this.state = {
             sortby: "Alphabetically",
             searchby: "",
-            products: []
+            products: [],
+            select: ""
         }
 
         this.example = {
@@ -35,6 +37,11 @@ class Shop extends Component {
         }
 
         
+    }
+
+    handleNavigation = (id) => {
+        console.log(id)
+        this.navigate('../products/' + id)
     }
 
     componentDidMount() {
@@ -52,12 +59,12 @@ class Shop extends Component {
 
 
     fetchShopItems = (select) => {
-        fetch("http://localhost:8080/collection/" + select)
+        fetch("http://localhost:8080/collection/select/" + select)
           .then(res => {
             res.json().then(resData => {
-                console.log(resData)
                 this.setState({
-                    products: resData
+                    products: resData,
+                    select: select
                 })
             })
           })
@@ -87,7 +94,7 @@ class Shop extends Component {
                 <ThemeProvider theme={this.shopTheme}>
                     <CssBaseline />
                     <Box>
-                        <Typography variant="h3" color="text.primary" align="center"> Products </Typography>
+                        <Typography variant="h3" color="text.primary" align="center"> {this.select} Products </Typography>
                         <Box sx={{
                             margin: "5vh",
                             display: "flex",
@@ -95,6 +102,8 @@ class Shop extends Component {
                         }}>
                             <Box sx={{
                                 width: "20%",
+                                height: "50%",
+                                paddingTop: "1vh",
                                 marginRight: "5vh",
                                 display: "flex",
                                 flexDirection: "column",
@@ -106,6 +115,7 @@ class Shop extends Component {
                                 <Select
                                     value={this.state.sortby}
                                     onChange={this.changeSort}
+                                    sx={{marginTop: "3vh"}}
                                 >
                                     <MenuItem value={'Alphabetically'}>
                                         Alphabetically A-Z
@@ -114,16 +124,16 @@ class Shop extends Component {
                                         Price
                                     </MenuItem>
                                 </Select>
-                                <Typography variant="h5">
+                                <Typography variant="h5" mt={3}>
                                     Filter By
                                 </Typography>
-                                <TextField />
+                                <TextField sx={{marginTop: "3vh"}}/>
                             </Box>
-                            <Grid container spacing={24}>
+                            <Grid container spacing={10}>
                                 {this.state.products.map(p => {
                                     return (
-                                        <Grid item>
-                                            <ProductCard  productInfo={p}/>
+                                        <Grid item xs={4}>
+                                            <ProductCard productInfo={p}/>
                                         </Grid>
                                     )
                                 })}                              

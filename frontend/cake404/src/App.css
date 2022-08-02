@@ -18,6 +18,10 @@
   background-size: cover;
   height: 100vh;
 }
+.shop input {
+  width: 10%;
+  height: 80%;
+}
 
 /* .home-bg-wrapper {
   display: "grid";
