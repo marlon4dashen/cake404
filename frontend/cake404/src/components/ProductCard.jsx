@@ -21,7 +21,7 @@ function ProductCard(props) {
 
     const handleNavigation = (id) => {
         console.log(id)
-        navigate('../products/' + id)
+        navigate('../products?id=' + id)
     }
 
     return (

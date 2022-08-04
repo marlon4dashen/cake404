@@ -38,7 +38,7 @@ exports.getCollections = (req, res, next) => {
 }
 
 exports.getById = (req, res, next) => {
-    let product_id = req.params.id
+    let product_id = req.query.id
     Product.find( { _id: product_id })
         .then(product => {
             if (!product){

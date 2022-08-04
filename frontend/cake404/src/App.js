@@ -114,7 +114,7 @@ class App extends Component {
             <Route path="/shop/:select" element={<Shop />} />
             <Route path="/signup" element={<SignUp signUp={this.handleSignUp} />} />
             <Route path="/about" element={<About  />} />
-            <Route path="/products/:id" element={<Product />} />
+            <Route path="/products" element={<Product />} />
             <Route path="/products" element={<Products />} />
             {this.state.auth && <Route path="/:userid" element={<User auth={this.state.auth} setAuth={this.handleAuth} />} />}
             <Route path="/*" element={<Error />}></Route>

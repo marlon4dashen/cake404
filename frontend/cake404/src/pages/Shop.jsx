@@ -23,25 +23,11 @@ class Shop extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            sortby: "Alphabetically",
+            sortby: this.sortAlpha,
             searchby: "",
             products: [],
             select: ""
         }
-
-        this.example = {
-            id: "1001",
-            name: "Black Forest",
-            image: "../assets/products/black_forest.jpeg",
-            price: "From $50.00"
-        }
-
-        
-    }
-
-    handleNavigation = (id) => {
-        console.log(id)
-        this.navigate('../products/' + id)
     }
 
     componentDidMount() {
@@ -81,10 +67,25 @@ class Shop extends Component {
             }
         }
     })
-        
+    
+
     changeSort = (e) => {
         this.setState({
             sortby: e.target.value
+        })
+    }
+
+    sortAlpha = () => {
+        this.state.products.sort((a, b) => (a.name > b.name ? 1 : -1))
+    }
+
+    sortPrice = () => {
+        this.state.products.sort((a, b) => a.price - b.price)
+    }
+
+    search = (e) => {
+        this.setState({
+            searchby: e.target.value
         })
     }
 
@@ -117,20 +118,21 @@ class Shop extends Component {
                                     onChange={this.changeSort}
                                     sx={{marginTop: "3vh"}}
                                 >
-                                    <MenuItem value={'Alphabetically'}>
+                                    <MenuItem value={this.sortAlpha}>
                                         Alphabetically A-Z
                                     </MenuItem>
-                                    <MenuItem value={'Price'}>
-                                        Price
+                                    <MenuItem value={this.sortPrice}>
+                                        Price Low to High
                                     </MenuItem>
                                 </Select>
                                 <Typography variant="h5" mt={3}>
                                     Filter By
                                 </Typography>
-                                <TextField sx={{marginTop: "3vh"}}/>
+                                <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={this.search} sx={{marginTop: "3vh"}} focused/>
                             </Box>
+                            {this.state.sortby()}
                             <Grid container spacing={10}>
-                                {this.state.products.map(p => {
+                                {this.state.products.filter(p => p.name.toLowerCase().includes(this.state.searchby)).map(p => {
                                     return (
                                         <Grid item xs={4}>
                                             <ProductCard productInfo={p}/>

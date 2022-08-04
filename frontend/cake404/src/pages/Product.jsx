@@ -3,12 +3,13 @@ import { Typography, Box, ThemeProvider, CssBaseline, Grid, Select, MenuItem, Te
 import { Component } from "react";
 import { createTheme, IconButton, iconButtonClasses } from "@mui/material";
 import {
-    useParams
+    useParams,
+    useSearchParams
   } from "react-router-dom";
 
 export function withRouter(Children) {
     return (props) => {
-      const match = { params: useParams() };
+      const match = { params: useParams(), query: useSearchParams() };
       return <Children {...props} match={match} />
     }
 }
@@ -22,13 +23,15 @@ class Product extends Component {
         }
     }
     componentDidMount() {
-        const id = this.props.match.params.id
+        const [search] = this.props.match.query
+        const id = search.get('id')
+        console.log(id)
         this.fetchItem(id)
         console.log(this.state)
     }
 
     fetchItem = (id) => {
-        fetch("http://localhost:8080/collection/id/" + id)
+        fetch("http://localhost:8080/collection/?id=" + id)
           .then(res => {
             res.json().then(resData => {
                 console.log(resData)
@@ -83,7 +86,15 @@ class Product extends Component {
                                 marginTop: "3vh"
                             }}>
                                 <Typography variant="h6"> Quantity </Typography>
-                                <input type="number" name="numericInput" min="0" max="10" />
+                                {/* <input type="number" name="numericInput" min="0" max="10" /> */}
+                                <TextField
+                                    type='number'
+                                    required
+                                    inputProps={{ max: 10, min: 0 }}
+                                    sx={{
+                                        marginTop: "1vh"
+                                    }}
+                                    variant='outlined' />
                             </Box>
                             <Button                                        
                                 variant="contained"
